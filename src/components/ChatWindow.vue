@@ -1,19 +1,32 @@
 <template>
 <div class="chat-window">
-    <div class="chat-messages">
+    <div id="block" class="chat-messages">
       <div class="scroll-wrapper">
         <slot></slot>
       </div>
     </div>
     <div class="chat-send-panel">
-      <input type="text" placeholder="Ваш никнейм..." class="chat-send-name-field" />
-      <input type="text" placeholder="Сообщение..." class="chat-send-message-field"/>
-      <button>
+      <input v-model="nick" type="text" placeholder="Ваш никнейм..." class="chat-send-name-field" />
+      <input v-model="text" type="text" placeholder="Сообщение..." class="chat-send-message-field"/>
+      <button @click="$emit('sendMessage', {username: nick, text: text})">
         <img src="img/send.png" />
       </button>
     </div>
   </div>
 </template>
+
+<script>
+  export default{
+    data(){
+      return{
+        nick: '',
+        text: ''
+      }
+    }
+  };
+</script>
+
+
 <style>
   .chat-window {
     width: 100%;
